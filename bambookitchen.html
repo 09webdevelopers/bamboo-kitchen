@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bamboo Kitchen — Freshly Crafted Takeaways, St Johns Auckland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bamboo: #2d5a1b;
+  --bamboo-light: #3d7a25;
+  --gold: #c8952a;
+  --gold-light: #e8b84b;
+  --cream: #faf6ee;
+  --warm: #f5ede0;
+  --ink: #1a1208;
+  --mid: #6b5d4a;
+  --line: rgba(45,90,27,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 400; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(250,246,238,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line); transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(45,90,27,0.1); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--bamboo); letter-spacing: -0.01em; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.2s; letter-spacing: 0.02em; }
+.nav-links a:hover { color: var(--bamboo); }
+.nav-order { background: var(--bamboo); color: white !important; padding: 0.55rem 1.4rem; border-radius: 6px; font-weight: 500 !important; transition: background 0.2s !important; }
+.nav-order:hover { background: var(--bamboo-light) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+.mobile-nav { display: none; position: fixed; inset: 0; top: 68px; background: var(--cream); z-index: 90; flex-direction: column; padding: 2rem 2.5rem; gap: 1.5rem; border-top: 1px solid var(--line); }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+.mobile-nav a:hover { color: var(--bamboo); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  background: var(--bamboo);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(200,149,42,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(45,90,27,0.8) 0%, transparent 50%);
+}
+/* Bamboo stalk decorations */
+.bamboo-deco {
+  position: absolute; top: 0; right: 8%;
+  width: 3px; height: 100%;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 160px);
+  border-radius: 2px;
+}
+.bamboo-deco::before {
+  content: '';
+  position: absolute; left: 18px; top: 0; width: 2px; height: 100%;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 100px, rgba(255,255,255,0.01) 100px, rgba(255,255,255,0.01) 200px);
+}
+.bamboo-deco::after {
+  content: '';
+  position: absolute; left: -25px; top: 0; width: 2px; height: 100%;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 120px, transparent 120px, transparent 240px);
+}
+
+.hero-ticker-top {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: var(--gold); padding: 0.5rem 0; overflow: hidden;
+  margin-top: 68px;
+}
+.hero-ticker-track {
+  display: flex; gap: 3rem; white-space: nowrap;
+  animation: ticker 20s linear infinite;
+}
+.hero-ticker-track span { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 12rem 2.5rem 5rem;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-weight: 900; color: white; line-height: 0.95;
+  letter-spacing: -0.02em; margin-bottom: 1.5rem;
+}
+.hero-title em { color: var(--gold-light); font-style: italic; display: block; }
+.hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 4rem; }
+.btn-primary { background: var(--gold); color: var(--ink); font-weight: 600; font-size: 0.95rem; padding: 0.9rem 2rem; border-radius: 6px; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; box-shadow: 0 4px 20px rgba(200,149,42,0.4); }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: white; font-weight: 500; font-size: 0.95rem; padding: 0.9rem 2rem; border-radius: 6px; text-decoration: none; display: inline-block; border: 1.5px solid rgba(255,255,255,0.3); transition: border-color 0.2s, transform 0.15s; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-2px); }
+.hero-info { display: flex; gap: 3rem; flex-wrap: wrap; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.hero-info-item { }
+.hero-info-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+.hero-info-val { font-size: 0.95rem; color: white; font-weight: 500; }
+.hero-info-val a { color: white; text-decoration: none; }
+
+/* DELIVERY BANNER */
+.delivery-bar { background: var(--ink); padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.delivery-bar span { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+.delivery-bar strong { color: white; }
+.delivery-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 0.3rem 0.9rem; font-size: 0.78rem; color: var(--gold-light); font-weight: 500; }
+
+/* SECTIONS */
+section { padding: 5.5rem 2.5rem; }
+.inner { max-width: 1200px; margin: 0 auto; }
+.section-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bamboo); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+.section-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; color: var(--ink); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.section-sub { color: var(--mid); max-width: 540px; line-height: 1.75; font-size: 0.97rem; }
+
+/* STORY */
+#story { background: var(--cream); }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.story-img-wrap { position: relative; }
+.story-img-box {
+  width: 100%; aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--bamboo) 0%, var(--bamboo-light) 100%);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.story-img-box::before {
+  content: '竹';
+  position: absolute; font-size: 20rem; color: rgba(255,255,255,0.04);
+  font-family: serif; line-height: 1; right: -2rem; bottom: -2rem;
+}
+.story-wok-icon { font-size: 5rem; position: relative; z-index: 1; }
+.story-badge {
+  position: absolute; bottom: -1.5rem; right: -1.5rem;
+  background: var(--gold); color: var(--ink);
+  font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+  padding: 1.25rem; border-radius: 50%; width: 100px; height: 100px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  line-height: 1.2; box-shadow: 0 8px 24px rgba(200,149,42,0.35);
+}
+.story-right .section-sub { margin-bottom: 1.5rem; }
+.story-points { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+.story-point { display: flex; align-items: flex-start; gap: 1rem; }
+.story-point-icon { width: 36px; height: 36px; background: rgba(45,90,27,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.story-point-text strong { display: block; font-weight: 600; color: var(--ink); font-size: 0.92rem; margin-bottom: 0.15rem; }
+.story-point-text span { font-size: 0.84rem; color: var(--mid); line-height: 1.5; }
+
+/* MENU */
+#menu { background: var(--warm); }
+.menu-header { text-align: center; margin-bottom: 3.5rem; }
+.menu-header .section-label { justify-content: center; }
+.menu-header .section-label::before { display: none; }
+.menu-cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.menu-cat {
+  background: white; border-radius: 12px; padding: 1.75rem;
+  border: 1.5px solid var(--line);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.menu-cat:hover { border-color: var(--bamboo); box-shadow: 0 8px 32px rgba(45,90,27,0.1); transform: translateY(-3px); }
+.menu-cat-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+.menu-cat-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+.menu-cat-desc { font-size: 0.83rem; color: var(--mid); line-height: 1.55; margin-bottom: 1rem; }
+.menu-cat-items { display: flex; flex-direction: column; gap: 0.4rem; }
+.menu-item { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.82rem; }
+.menu-item-name { color: var(--ink); }
+.menu-item-price { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--bamboo); font-weight: 600; }
+.menu-item-note { font-size: 0.72rem; color: var(--mid); font-style: italic; grid-column: 1/-1; }
+.menu-cta { text-align: center; }
+
+/* SPECIALS */
+#specials { background: var(--bamboo); }
+.specials-header { text-align: center; margin-bottom: 3.5rem; }
+.specials-header .section-label { justify-content: center; color: var(--gold-light); }
+.specials-header .section-label::before { background: var(--gold); }
+.specials-header .section-title { color: white; }
+.specials-header .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto; }
+.specials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.special-card {
+  background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 2rem;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+.special-card:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); transform: translateY(-4px); }
+.special-badge { display: inline-block; background: var(--gold); color: var(--ink); font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 1rem; font-weight: 700; }
+.special-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+.special-desc { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 1.25rem; }
+.special-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold-light); }
+
+/* ORDER */
+#order { background: var(--cream); }
+.order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.order-options { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+.order-option {
+  display: flex; align-items: center; gap: 1.25rem;
+  background: white; border-radius: 12px; padding: 1.5rem;
+  border: 1.5px solid var(--line); text-decoration: none;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.order-option:hover { border-color: var(--bamboo); box-shadow: 0 8px 32px rgba(45,90,27,0.1); transform: translateX(4px); }
+.order-option-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+.oi-phone { background: rgba(45,90,27,0.1); }
+.oi-uber { background: #000; }
+.oi-doordash { background: #ff3008; }
+.oi-walkin { background: rgba(200,149,42,0.15); }
+.order-option-text strong { display: block; font-weight: 600; color: var(--ink); margin-bottom: 0.15rem; }
+.order-option-text span { font-size: 0.83rem; color: var(--mid); }
+.order-option-arrow { margin-left: auto; color: var(--mid); font-size: 1.2rem; flex-shrink: 0; }
+.order-right { background: var(--bamboo); border-radius: 16px; padding: 3rem; color: white; }
+.order-right h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+.order-right p { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.65; margin-bottom: 2rem; }
+.hours-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.hours-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.hours-row:last-child { border-bottom: none; }
+.hours-day { color: rgba(255,255,255,0.6); }
+.hours-time { color: white; font-weight: 500; font-family: 'Space Mono', monospace; font-size: 0.78rem; }
+.hours-badge { background: var(--gold); color: var(--ink); font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 4px; font-family: 'Space Mono', monospace; letter-spacing: 0.05em; }
+
+/* FIND US */
+#find { background: var(--warm); }
+.find-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.find-details { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+.find-detail { display: flex; align-items: flex-start; gap: 1rem; }
+.fd-icon { width: 44px; height: 44px; background: rgba(45,90,27,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.fd-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bamboo); margin-bottom: 0.2rem; }
+.fd-val { font-size: 0.92rem; color: var(--ink); font-weight: 500; }
+.fd-val a { color: var(--bamboo); text-decoration: none; }
+.fd-val a:hover { text-decoration: underline; }
+.map-placeholder { background: var(--bamboo); border-radius: 16px; height: 360px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: white; }
+.map-placeholder .map-icon { font-size: 3rem; }
+.map-placeholder h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.map-placeholder p { font-size: 0.85rem; color: rgba(255,255,255,0.65); text-align: center; max-width: 220px; }
+.map-placeholder a { display: inline-block; margin-top: 0.5rem; background: var(--gold); color: var(--ink); font-weight: 600; font-size: 0.85rem; padding: 0.65rem 1.5rem; border-radius: 6px; text-decoration: none; }
+.social-links { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.social-link { display: flex; align-items: center; gap: 0.5rem; background: white; border: 1.5px solid var(--line); border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.82rem; font-weight: 500; color: var(--ink); text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+.social-link:hover { border-color: var(--bamboo); color: var(--bamboo); }
+
+/* FOOTER */
+footer { background: var(--ink); padding: 3rem 2.5rem 2rem; }
+.footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 2rem; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+.footer-logo span { color: var(--gold); }
+.footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.45); max-width: 240px; line-height: 1.6; }
+.footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-col-title { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; }
+.footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold-light); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+.footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.d1 { transition-delay: 0.1s; } .fade-up.d2 { transition-delay: 0.2s; }
+.fade-up.d3 { transition-delay: 0.3s; } .fade-up.d4 { transition-delay: 0.4s; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .story-img-wrap { display: none; }
+  .specials-grid { grid-template-columns: 1fr 1fr; }
+  .order-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .find-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+@media (max-width: 600px) {
+  section { padding: 4rem 1.25rem; }
+  nav { padding: 1rem 1.25rem; }
+  .hero-content { padding: 10rem 1.25rem 4rem; }
+  .hero-title { font-size: 3.2rem; }
+  .menu-cats { grid-template-columns: 1fr; }
+  .specials-grid { grid-template-columns: 1fr; }
+  .delivery-bar { padding: 1rem 1.25rem; }
+  .hero-info { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Bamboo<span>Kitchen</span></div>
+  <div class="nav-links">
+    <a href="#story">Our Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#order">Order</a>
+    <a href="#find">Find Us</a>
+    <a href="https://myorders.touchtecgl.nz/?venue=3db3a9ed-cdf7-452d-9354-a079472af6c1" target="_blank" class="nav-order">Order Online →</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#story" onclick="closeMobileNav()">Our Story</a>
+  <a href="#menu" onclick="closeMobileNav()">Menu</a>
+  <a href="#order" onclick="closeMobileNav()">Order</a>
+  <a href="#find" onclick="closeMobileNav()">Find Us</a>
+  <a href="https://myorders.touchtecgl.nz/?venue=3db3a9ed-cdf7-452d-9354-a079472af6c1" target="_blank" onclick="closeMobileNav()">Order Online →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="bamboo-deco"></div>
+  <div class="hero-ticker-top">
+    <div class="hero-ticker-track">
+      <span>Freshly Crafted Takeaways</span><span> ✦ </span>
+      <span>St Johns, Auckland</span><span> ✦ </span>
+      <span>Chinese & Asian Inspired</span><span> ✦ </span>
+      <span>Burgers & Fish & Chips</span><span> ✦ </span>
+      <span>UberEats & DoorDash</span><span> ✦ </span>
+      <span>Call Ahead to Order</span><span> ✦ </span>
+      <span>Freshly Crafted Takeaways</span><span> ✦ </span>
+      <span>St Johns, Auckland</span><span> ✦ </span>
+      <span>Chinese & Asian Inspired</span><span> ✦ </span>
+      <span>Burgers & Fish & Chips</span><span> ✦ </span>
+      <span>UberEats & DoorDash</span><span> ✦ </span>
+      <span>Call Ahead to Order</span><span> ✦ </span>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up">St Johns, Auckland — Since the 80s</div>
+    <h1 class="hero-title fade-up d1">
+      Freshly<br>
+      <em>Crafted.</em>
+    </h1>
+    <p class="hero-sub fade-up d2">Real Chinese and Asian inspired takeaways made fresh in front of you — using the finest ingredients. Plus burgers, fish & chips, and everything in between.</p>
+    <div class="hero-actions fade-up d3">
+      <a href="https://myorders.touchtecgl.nz/?venue=3db3a9ed-cdf7-452d-9354-a079472af6c1" target="_blank" class="btn-primary">Order Online Now</a>
+      <a href="#menu" class="btn-ghost">View Full Menu</a>
+    </div>
+    <div class="hero-info fade-up d4">
+      <div class="hero-info-item">
+        <div class="hero-info-label">Phone</div>
+        <div class="hero-info-val"><a href="tel:+6495288888">09 528 8888</a></div>
+      </div>
+      <div class="hero-info-item">
+        <div class="hero-info-label">Address</div>
+        <div class="hero-info-val">112 St Johns Rd, St Johns</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="hero-info-label">Delivery</div>
+        <div class="hero-info-val">UberEats & DoorDash</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY BAR -->
+<div class="delivery-bar">
+  <span>🛵 Home delivery available via</span>
+  <div class="delivery-pill">🟡 Uber Eats</div>
+  <div class="delivery-pill">🔴 DoorDash</div>
+  <span>or <strong>call ahead</strong> — <a href="tel:+6495288888" style="color:var(--gold-light);text-decoration:none;">09 528 8888</a></span>
+</div>
+
+<!-- STORY -->
+<section id="story">
+  <div class="inner">
+    <div class="story-grid">
+      <div class="story-img-wrap fade-up">
+        <div class="story-img-box">
+          <div class="story-wok-icon">🥢</div>
+        </div>
+        <div class="story-badge">Fresh<br>Every<br>Time</div>
+      </div>
+      <div class="story-right">
+        <div class="section-label fade-up">Our Story</div>
+        <h2 class="section-title fade-up d1">Made right in<br>front of you.</h2>
+        <p class="section-sub fade-up d2">At Bamboo Kitchen we pride ourselves on crafting the finest quality Chinese and Asian inspired takeaways. Our chefs create your meal right in front of you in our St Johns kitchen — using the freshest possible ingredients.</p>
+        <p class="section-sub fade-up d2" style="margin-top:1rem">So what's it going to be tonight? Lemon Chicken, BBQ Pork Chow Mein, or something totally new? — Cheers, Norm & The Bamboo Kitchen Family.</p>
+        <div class="story-points fade-up d3">
+          <div class="story-point">
+            <div class="story-point-icon">🌿</div>
+            <div class="story-point-text">
+              <strong>Freshest Ingredients</strong>
+              <span>Every dish made to order with quality produce — nothing sitting under a heat lamp.</span>
+            </div>
+          </div>
+          <div class="story-point">
+            <div class="story-point-icon">👨‍🍳</div>
+            <div class="story-point-text">
+              <strong>Cooked In Front of You</strong>
+              <span>Watch your meal go from raw ingredients into the wok and straight to your hands.</span>
+            </div>
+          </div>
+          <div class="story-point">
+            <div class="story-point-icon">❤️</div>
+            <div class="story-point-text">
+              <strong>Auckland's Local Favourite</strong>
+              <span>A St Johns institution loved by the community for decades.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="inner">
+    <div class="menu-header fade-up">
+      <div class="section-label">What's On The Menu</div>
+      <h2 class="section-title">Something for everyone.</h2>
+      <p class="section-sub" style="margin:0 auto">From classic chow mein to burgers, fish & chips, soups, curries and more — all made fresh to order.</p>
+    </div>
+    <div class="menu-cats">
+      <div class="menu-cat fade-up">
+        <div class="menu-cat-icon">🍜</div>
+        <div class="menu-cat-name">Chow Mein</div>
+        <p class="menu-cat-desc">Classic crispy or soft noodles with your choice of meat</p>
+        <div class="menu-cat-items">
+          <div class="menu-item"><span class="menu-item-name">Vege</span><span class="menu-item-price">$17</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chicken / Steak / BBQ Pork</span><span class="menu-item-price">$20</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bamboo Special</span><span class="menu-item-price">$22</span></div>
+          <div class="menu-item"><span class="menu-item-name">Seafood Special</span><span class="menu-item-price">$24</span></div>
+        </div>
+      </div>
+      <div class="menu-cat fade-up d1">
+        <div class="menu-cat-icon">🍚</div>
+        <div class="menu-cat-name">Fried Rice</div>
+        <p class="menu-cat-desc">With egg, onion, peas & bean sprouts</p>
+        <div class="menu-cat-items">
+          <div class="menu-item"><span class="menu-item-name">Plain</span><span class="menu-item-price">$17</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chicken / Steak / BBQ Pork</span><span class="menu-item-price">$20</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bamboo Special</span><span class="menu-item-price">$22</span></div>
+          <div class="menu-item"><span class="menu-item-name">Seafood Special</span><span class="menu-item-price">$24</span></div>
+        </div>
+      </div>
+      <div class="menu-cat fade-up d2">
+        <div class="menu-cat-icon">🍋</div>
+        <div class="menu-cat-name">Sauces & Curries</div>
+        <p class="menu-cat-desc">Sweet & sour, lemon, black bean, curry, satay & more</p>
+        <div class="menu-cat-items">
+          <div class="menu-item"><span class="menu-item-name">Sweet & Sour Pork/Chicken</span><span class="menu-item-price">$20</span></div>
+          <div class="menu-item"><span class="menu-item-name">Lemon Chicken or Fish</span><span class="menu-item-price">$20</span></div>
+          <div class="menu-item"><span class="menu-item-name">Thai Green / Malaysian Curry</span><span class="menu-item-price">$21</span></div>
+          <div class="menu-item"><span class="menu-item-name">Pad Thai</span><span class="menu-item-price">$21</span></div>
+        </div>
+      </div>
+      <div class="menu-cat fade-up">
+        <div class="menu-cat-icon">🍔</div>
+        <div class="menu-cat-name">Burgers</div>
+        <p class="menu-cat-desc">Served with a meat pattie & fresh salad</p>
+        <div class="menu-cat-items">
+          <div class="menu-item"><span class="menu-item-name">Hamburger</span><span class="menu-item-price">$7.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Cheese / Egg / Hawaiian</span><span class="menu-item-price">$8.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Chicken / Steak Burger</span><span class="menu-item-price">$10.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Bamboo Special Burger</span><span class="menu-item-price">$11.50</span></div>
+        </div>
+      </div>
+      <div class="menu-cat fade-up d1">
+        <div class="menu-cat-icon">🐟</div>
+        <div class="menu-cat-name">Deep Fries & Snacks</div>
+        <p class="menu-cat-desc">Fish, chips, spring rolls, wontons & more</p>
+        <div class="menu-cat-items">
+          <div class="menu-item"><span class="menu-item-name">Chips (Min)</span><span class="menu-item-price">$4.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Fish - Hoki</span><span class="menu-item-price">$5.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Spring Roll (Home Made)</span><span class="menu-item-price">$4.50</span></div>
+          <div class="menu-item"><span class="menu-item-name">Dumplings (6 pcs)</span><span class="menu-item-price">$9.00</span></div>
+        </div>
+      </div>
+      <div class="menu-cat fade-up d2">
+        <div class="menu-cat-icon">🍲</div>
+        <div class="menu-cat-name">Soups & Noodles</div>
+        <p class="menu-cat-desc">Won ton, laksa, Singapore noodles & more</p>
+        <div class="menu-cat-items">
+          <div class="menu-item"><span class="menu-item-name">Won Ton Soup</span><span class="menu-item-price">$14</span></div>
+          <div class="menu-item"><span class="menu-item-name">Laksa Dumpling Soup</span><span class="menu-item-price">$16</span></div>
+          <div class="menu-item"><span class="menu-item-name">Singapore Fried Noodles</span><span class="menu-item-price">$21</span></div>
+          <div class="menu-item"><span class="menu-item-name">Pad Thai</span><span class="menu-item-price">$21</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-cta fade-up">
+      <p style="color:var(--mid);font-size:0.85rem;margin-bottom:1.25rem">All dishes available as half size ($10–$15) · All prices include GST</p>
+      <a href="https://myorders.touchtecgl.nz/?venue=3db3a9ed-cdf7-452d-9354-a079472af6c1" target="_blank" class="btn-primary" style="background:var(--bamboo);box-shadow:0 4px 20px rgba(45,90,27,0.3)">Order Online Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section id="specials">
+  <div class="inner">
+    <div class="specials-header fade-up">
+      <div class="section-label">Must Try</div>
+      <h2 class="section-title">Bamboo Favourites</h2>
+      <p class="section-sub">The dishes our regulars keep coming back for — fresh from the wok every time.</p>
+    </div>
+    <div class="specials-grid">
+      <div class="special-card fade-up">
+        <div class="special-badge">Fan Favourite</div>
+        <div class="special-name">Bamboo Special Fried Rice</div>
+        <p class="special-desc">Prawns, chicken, BBQ pork, mushrooms & cashew nuts — tossed with egg, onion, peas & bean sprouts. The one that started it all.</p>
+        <div class="special-price">$22</div>
+      </div>
+      <div class="special-card fade-up d1">
+        <div class="special-badge">House Classic</div>
+        <div class="special-name">BBQ Pork Chow Mein</div>
+        <p class="special-desc">Crispy noodles, tender BBQ pork, fresh vegetables. Simple, honest, and absolutely delicious. Soft noodles available for $2 extra.</p>
+        <div class="special-price">$20</div>
+      </div>
+      <div class="special-card fade-up d2">
+        <div class="special-badge">Most Ordered</div>
+        <div class="special-name">Lemon Chicken</div>
+        <p class="special-desc">Perfectly golden fried chicken in our signature lemon sauce. Served on white rice. A St Johns staple that never disappoints.</p>
+        <div class="special-price">$20</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order">
+  <div class="inner">
+    <div class="order-grid">
+      <div>
+        <div class="section-label fade-up">How to Order</div>
+        <h2 class="section-title fade-up d1">Your way,<br>your night.</h2>
+        <p class="section-sub fade-up d2">Order online, call ahead, get it delivered, or just pop in — we'll get your meal into the wok right away.</p>
+        <div class="order-options fade-up d3">
+          <a href="https://myorders.touchtecgl.nz/?venue=3db3a9ed-cdf7-452d-9354-a079472af6c1" target="_blank" class="order-option">
+            <div class="order-option-icon oi-walkin">🖥️</div>
+            <div class="order-option-text"><strong>Order Online</strong><span>Order ahead at your convenience</span></div>
+            <div class="order-option-arrow">→</div>
+          </a>
+          <a href="tel:+6495288888" class="order-option">
+            <div class="order-option-icon oi-phone">📞</div>
+            <div class="order-option-text"><strong>Call to Order</strong><span>09 528 8888 — we'll have it ready</span></div>
+            <div class="order-option-arrow">→</div>
+          </a>
+          <a href="https://www.ubereats.com" target="_blank" class="order-option">
+            <div class="order-option-icon oi-uber" style="color:white;font-size:0.7rem;font-weight:800;font-family:sans-serif;">Uber<br>Eats</div>
+            <div class="order-option-text"><strong>Uber Eats</strong><span>Home delivery available now</span></div>
+            <div class="order-option-arrow">→</div>
+          </a>
+          <a href="https://www.doordash.com" target="_blank" class="order-option">
+            <div class="order-option-icon oi-doordash" style="color:white;font-size:1rem;">🚗</div>
+            <div class="order-option-text"><strong>DoorDash</strong><span>Home delivery available now</span></div>
+            <div class="order-option-arrow">→</div>
+          </a>
+        </div>
+      </div>
+      <div class="order-right fade-up d2">
+        <h3>Opening Hours</h3>
+        <p>We're open most days — call ahead if you're unsure and we'll sort you out.</p>
+        <div class="hours-list">
+          <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-time">11:30am – 9:00pm</span></div>
+          <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">11:30am – 9:00pm</span></div>
+          <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">11:30am – 9:00pm</span></div>
+          <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">11:30am – 9:00pm</span></div>
+          <div class="hours-row">
+            <span class="hours-day">Friday</span>
+            <span><span class="hours-badge">Late</span> <span class="hours-time">11:30am – 9:30pm</span></span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Saturday</span>
+            <span><span class="hours-badge">Late</span> <span class="hours-time">11:30am – 9:30pm</span></span>
+          </div>
+          <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">11:30am – 9:00pm</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section id="find">
+  <div class="inner">
+    <div class="find-grid">
+      <div>
+        <div class="section-label fade-up">Find Us</div>
+        <h2 class="section-title fade-up d1">Come on in.</h2>
+        <p class="section-sub fade-up d2">We're right in the heart of St Johns — easy to find, easy to park, and always worth the trip.</p>
+        <div class="find-details fade-up d3">
+          <div class="find-detail">
+            <div class="fd-icon">📍</div>
+            <div><div class="fd-label">Address</div><div class="fd-val">112 St Johns Road, St Johns, Auckland</div></div>
+          </div>
+          <div class="find-detail">
+            <div class="fd-icon">📞</div>
+            <div><div class="fd-label">Phone</div><div class="fd-val"><a href="tel:+6495288888">09 528 8888</a></div></div>
+          </div>
+          <div class="find-detail">
+            <div class="fd-icon">🕐</div>
+            <div><div class="fd-label">Hours</div><div class="fd-val">Open 7 days · 11:30am – 9pm (9:30pm Fri & Sat)</div></div>
+          </div>
+        </div>
+        <div class="social-links fade-up d4">
+          <a href="http://www.facebook.com/bambookitchennz" target="_blank" class="social-link">📘 Facebook</a>
+          <a href="http://instagram.com/bambookitchennz" target="_blank" class="social-link">📸 Instagram</a>
+        </div>
+      </div>
+      <div class="map-placeholder fade-up d1">
+        <div class="map-icon">📍</div>
+        <h3>112 St Johns Road</h3>
+        <p>St Johns, Auckland — easy parking available out front</p>
+        <a href="https://maps.google.com/?q=112+St+Johns+Road+St+Johns+Auckland" target="_blank">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Bamboo<span>Kitchen</span></div>
+        <p class="footer-tagline">Freshly crafted takeaways at 112 St Johns Rd, Auckland. Open 7 days.</p>
+      </div>
+      <div style="display:flex;gap:4rem;flex-wrap:wrap">
+        <div class="footer-links">
+          <div class="footer-col-title">Navigate</div>
+          <a href="#story">Our Story</a>
+          <a href="#menu">Menu</a>
+          <a href="#specials">Favourites</a>
+          <a href="#order">Order</a>
+          <a href="#find">Find Us</a>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col-title">Order</div>
+          <a href="https://myorders.touchtecgl.nz/?venue=3db3a9ed-cdf7-452d-9354-a079472af6c1" target="_blank">Order Online</a>
+          <a href="tel:+6495288888">Call: 09 528 8888</a>
+          <a href="https://www.ubereats.com" target="_blank">Uber Eats</a>
+          <a href="https://www.doordash.com" target="_blank">DoorDash</a>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col-title">Follow Us</div>
+          <a href="http://www.facebook.com/bambookitchennz" target="_blank">Facebook</a>
+          <a href="http://instagram.com/bambookitchennz" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Bamboo Kitchen. All rights reserved.</div>
+      <div class="footer-credit">Website by <a href="https://09webdevelopers.co.nz" style="color:rgba(255,255,255,0.4);text-decoration:none;">09 Web Developers</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+  function toggleMobileNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+  const fades = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  fades.forEach(el => obs.observe(el));
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href && href.startsWith('#')) { e.preventDefault(); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
